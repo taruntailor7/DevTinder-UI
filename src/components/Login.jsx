@@ -1,17 +1,24 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const [emailId, setEmailid] = useState("akshay@gmail.com");
   const [password, setPassword] = useState("Akshay@1234");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const loggedInUser = await axios.post("http://localhost:5000/auth/login", {
+      const loggedInUser = await axios.post(BASE_URL + "/auth/login", {
         "email": emailId,
         "password": password,
       }, { withCredentials: true }); // we have to pass withCredentials because in backend credentials is true then itwill set the cookies in frontend browser.
-      console.log('loggedInUser', loggedInUser);
+      dispatch(addUser(loggedInUser.data.data));
+      return navigate("/");
     } catch (error) {
       console.log('Error while loging in: ', error);
     }
