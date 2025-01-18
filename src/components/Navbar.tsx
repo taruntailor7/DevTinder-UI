@@ -13,19 +13,25 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post(BASE_URL + "/auth/logout", {}, {withCredentials: true});
+      await axios.post(
+        BASE_URL + "/auth/logout",
+        {},
+        { withCredentials: true }
+      );
       dispatch(removeUser());
       dispatch(removeFeed());
-      return navigate("/login")
+      return navigate("/login");
     } catch (error) {
-      console.log('Error while logout', error);
-    }    
-  }
+      console.log("Error while logout", error);
+    }
+  };
 
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">DevTinder</Link>
+        <Link to="/" className="btn btn-ghost text-xl">
+          DevTinder
+        </Link>
       </div>
       {user && (
         <div className="flex-none gap-2">
@@ -53,11 +59,17 @@ const Navbar = () => {
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/requests" className="justify-between">
+                  Requests
+                </Link>
+              </li>
+              <li>
+                <Link to="/connections" className="justify-between">
+                  Connections
+                </Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
