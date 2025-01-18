@@ -82,7 +82,7 @@ const Signup = () => {
                 <span className="label-text">Password</span>
               </div>
               <input
-                type="text"
+                type="password"
                 value={password}
                 placeholder="Enter your password..."
                 className="input input-bordered w-full max-w-xs"
