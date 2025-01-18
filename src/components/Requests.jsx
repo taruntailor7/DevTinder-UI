@@ -8,12 +8,11 @@ const Requests = () => {
 
   const reviewRequest = async (status, userId) => {
     try {
-      const res = await axios.post(
+      await axios.post(
         BASE_URL + `/request/review/${status}/${userId}`,
         {},
         { withCredentials: true }
       );
-      console.log("Status of request", res.data.data);
       fetchRequests();
     } catch (error) {
       console.log("Error while reviwing request", error);

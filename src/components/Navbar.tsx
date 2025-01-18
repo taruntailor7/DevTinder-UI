@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
-import { removeFeed } from "../utils/feedSlice";
+import { removeUserFromFeed } from "../utils/feedSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user); // Subscribing store here.
@@ -19,7 +19,7 @@ const Navbar = () => {
         { withCredentials: true }
       );
       dispatch(removeUser());
-      dispatch(removeFeed());
+      dispatch(removeUserFromFeed(user._id));
       return navigate("/login");
     } catch (error) {
       console.log("Error while logout", error);
